@@ -16,6 +16,8 @@ public class CounterTests : BlazorTest
         await Page.GotoAsync(RootUri.AbsoluteUri, new() { WaitUntil = WaitUntilState.NetworkIdle });
         await Page.GetByRole(AriaRole.Link, new() { Name = "Counter" }).ClickAsync();
         await Page.GetByRole(AriaRole.Button, new() { Name = "Click me" }).ClickAsync();
+        // The test was checking before the button had updated.
+        // The correct style of call needs to be made here
         await Page.PauseAsync();
         await Expect(Page.GetByRole(AriaRole.Status)).ToHaveTextAsync("Current count: 1");
     }
